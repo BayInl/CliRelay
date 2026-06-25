@@ -636,8 +636,7 @@ func opencodeGoModelNameImpliesVision(model string) bool {
 }
 
 func opencodeGoDisablesThinkingForVisionFallback(model string) bool {
-	baseModel := strings.ToLower(strings.TrimSpace(thinking.ParseSuffix(model).ModelName))
-	return strings.HasPrefix(baseModel, "qwen")
+	return true
 }
 
 var opencodeGoFallbackModelFieldPaths = []string{

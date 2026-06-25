@@ -194,8 +194,8 @@ func TestOpenCodeGoExecutorUsesConfiguredNonQwenVisionFallback(t *testing.T) {
 	if !strings.Contains(string(gotBody), `"image_url"`) {
 		t.Fatalf("image should be preserved for vision fallback model; body=%s", string(gotBody))
 	}
-	if gjson.GetBytes(gotBody, "enable_thinking").Exists() {
-		t.Fatalf("enable_thinking should not be added for non-qwen fallback; body=%s", string(gotBody))
+	if !gjson.GetBytes(gotBody, "enable_thinking").Exists() || gjson.GetBytes(gotBody, "enable_thinking").Bool() {
+		t.Fatalf("enable_thinking should be false for vision fallback; body=%s", string(gotBody))
 	}
 	if gotModel := gjson.GetBytes(resp.Payload, "model").String(); gotModel != "deepseek-v4-flash" {
 		t.Fatalf("response model = %q, want deepseek-v4-flash; payload=%s", gotModel, string(resp.Payload))
