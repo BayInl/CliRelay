@@ -275,6 +275,7 @@ func (e *OpenCodeGoExecutor) applyVisionFallback(auth *cliproxyauth.Auth, req cl
 	req.Payload, _ = sjson.SetBytes(req.Payload, "model", fallback)
 	if opencodeGoDisablesThinkingForVisionFallback(fallback) {
 		req.Payload, _ = sjson.SetBytes(req.Payload, "enable_thinking", false)
+		req.Payload, _ = sjson.SetBytes(req.Payload, "thinking.type", "disabled")
 	}
 	result.Request = req
 	result.FallbackModel = fallback
